@@ -1,6 +1,8 @@
 <template>
   <div>
     <h1>TodoList</h1>
+    <button @click="checkAll">checkAll</button>
+    <button @click="deleteAll">delete all</button>
     <form @submit.prevent="formSubmit">
       <label for="newTodo"></label>
       <input type="text" id="newTodo" v-model="newTodo" />
@@ -37,7 +39,13 @@ export default {
       todo.done = !todo.done;
     }
     function removeTodo(index){
-      todos.value.splice(index, 1)
+      todos.value.splice(index, 1);
+    }
+    function checkAll(){
+      todos.value.forEach(todo => todo.done = true );
+    }
+    function deleteAll(){
+      todos.value = []
     }
 
     return {
@@ -45,7 +53,9 @@ export default {
       todos,
       formSubmit,
       toggleClass,
-      removeTodo
+      removeTodo,
+      checkAll,
+      deleteAll
     };
   },
 };
